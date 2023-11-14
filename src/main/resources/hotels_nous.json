@@ -1,0 +1,44 @@
+{
+    "empresa": "Luabbay",
+    "fundacion": 1993,
+    "ciudadSede": "Hannover",
+    "paisSede": "DE",
+    "hotel": [
+      {
+        "nombre": "TUI BLUE Rocador",
+        "estrellas": 3,
+        "telefono": 612622331,
+        "direccion": {
+          "calle": "Paseo maritimo",
+          "numero": 2,
+          "ciudad": "Palma",
+          "codigoPostal": 7002,
+          "pais": "ES"
+        }
+      },
+      {
+        "nombre": "Grupotel Alcudia Pins",
+        "estrellas": 4,
+        "telefono": 678675342,
+        "direccion": {
+          "calle": "Alcudia",
+          "numero": 81,
+          "ciudad": "Alcudia",
+          "codigoPostal": 7871,
+          "pais": "ES"
+        }
+      },
+      {
+        "nombre": "TUI BLUE Aura",
+        "estrellas": 4,
+        "telefono": 677565422,
+        "direccion": {
+          "calle": "Gracia",
+          "numero": 3,
+          "ciudad": "Ibiza",
+          "codigoPostal": 7872,
+          "pais": "ES"
+        }
+      }
+    ]
+  }

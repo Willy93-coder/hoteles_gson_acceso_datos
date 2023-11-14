@@ -1,0 +1,44 @@
+{
+    "empresa": "RIU",
+    "fundacion": 1953,
+    "ciudadSede": "Palma",
+    "paisSede": "ES",
+    "hotel": [
+      {
+        "nombre": "Riu Chiclana",
+        "estrellas": 4,
+        "telefono": 687622331,
+        "direccion": {
+          "calle": "Paseo maritimo",
+          "numero": 4,
+          "ciudad": "Chiclana",
+          "codigoPostal": 6871,
+          "pais": "ES"
+        }
+      },
+      {
+        "nombre": "Riu La Mola",
+        "estrellas": 4,
+        "telefono": 687442331,
+        "direccion": {
+          "calle": "Principal",
+          "numero": 81,
+          "ciudad": "La Mola",
+          "codigoPostal": 7871,
+          "pais": "ES"
+        }
+      },
+      {
+        "nombre": "Riu Palace",
+        "estrellas": 3,
+        "telefono": 666888111,
+        "direccion": {
+          "calle": "Juan Quevedo",
+          "numero": 2,
+          "ciudad": "Las Palmas de Gran Canaria",
+          "codigoPostal": 3871,
+          "pais": "ES"
+        }
+      }
+    ]
+}
