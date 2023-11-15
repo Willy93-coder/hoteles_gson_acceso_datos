@@ -1,8 +1,8 @@
 package com.dam.U1EX05_GCG;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +18,9 @@ import com.google.gson.JsonSyntaxException;
 @SpringBootApplication
 public class U1Ex05GcgApplication {
 
+	private static String jsonHotelsPath = "src/main/resources/hotels.json";
+	private static String jsonNewHotels = "src/main/resources/hotels_nous.json";
+
 	public static void main(String[] args) {
 		SpringApplication.run(U1Ex05GcgApplication.class, args);
 
@@ -25,7 +28,13 @@ public class U1Ex05GcgApplication {
 		Gson gsonEscritura = gsonBuilder.create();
 		Gson gsonLectura = new Gson();
 
+		Direccion riuPalma = new Direccion("c/Perez ruiz", 44, "Palma", 7009, "España");
+		Hotel hotel = new Hotel("Riu Palma", 5, 637772881, riuPalma);
+
 		mostrarJsonPorConsola(gsonLectura);
+		altaNouHotel(gsonLectura, hotel);
+		upgradeHotelsFourStarsToFiveStars(jsonHotelsPath, gsonEscritura);
+		agregarNuevosHoteles(jsonHotelsPath, jsonNewHotels, gsonEscritura);
 
 	}
 
@@ -99,25 +108,60 @@ public class U1Ex05GcgApplication {
 	/*3. Debido a una reciente política de renovaciones de hoteles, todos los hoteles de la empresa que tengan 4 estrelles 
 	adquirirán una estrella más. Realizar la funcionalidad necesaria que haga este cambio y actualice el documento hoteles.json.*/
 	public static void upgradeHotelsFourStarsToFiveStars(String jsonPath, Gson gson){
+		Empresa hotelCompany = null;
+
 		try {
-			
+			hotelCompany = gson.fromJson(new FileReader(jsonPath), Empresa.class);
+			Hotel[] hotels = hotelCompany.getHotel();
+			for (Hotel hotel : hotels) {
+				if (hotel.getEstrellas() == 4) {
+					hotel.setEstrellas(hotel.getEstrellas() + 1);
+				}
+			}
+			hotelCompany.setHotel(hotels);
+			writeJson(gson, hotelCompany, jsonPath);
+		} catch(IOException e){
+			System.err.println("Error al sobreescribir en el json");
 		} catch (Exception e) {
 			System.err.println("Ha habido un error en la modificacion de 4 a 5 estrellas");
 		}
 	}
 
-	public void reader(String path) throws IOException {
-		FileReader fr = new FileReader(path);
-		BufferedReader br = new BufferedReader(fr);
-		br.readLine();
+	public static void writeJson(Gson gson, Empresa newJson, String currentJson) throws IOException {
+		FileWriter wr = new FileWriter(currentJson);
+		gson.toJson(newJson ,wr);
+		wr.close();
 	}
+
+	
 
 	
 	/*4. El grupo hostelero adquirirá a una empresa que es encuentra en concurso de acreedors, la información de los hoteles incluidos 
 	en el archivo JSON llamado hoteles_nuevos.json, por lo tanto, el objetivo es integrar estos nuevos hoteles al archivo original hotels.json.*/
-	
-	
-	/*5. Mencionar las ventajas y desventajas, entre los tecnologías GSON y JACKSON vistes en clase para el procesamiento de archivos JSON. (2 puntos) */
+	public static void agregarNuevosHoteles(String json, String jsonNwHotels, Gson gson) {
+		Empresa hotelCompany = null;
+		Empresa newHotelsCompany = null;
+		Hotel[] includeNewHotels = null;
 
+		try {
+			hotelCompany = gson.fromJson(new FileReader(json), Empresa.class);
+			newHotelsCompany = gson.fromJson(new FileReader(jsonNwHotels), Empresa.class);
+			Hotel[] hotels = hotelCompany.getHotel();
+			Hotel[] newHotels = newHotelsCompany.getHotel();
+			ArrayList<Hotel> hotelRes = new ArrayList<Hotel>(Arrays.asList(hotels));
+			for (Hotel hotel : newHotels) {
+				hotelRes.add(hotel);
+			}
+			includeNewHotels = new Hotel[hotelRes.size()];
+			includeNewHotels = hotelRes.toArray(includeNewHotels);
+			hotelCompany.setHotel(includeNewHotels);
+			writeJson(gson, hotelCompany, json);
+
+		} catch(IOException e){
+			System.err.println("Error al sobreescribir en el json");
+		} catch (Exception e) {
+			System.err.println("Ha habido un error al tratar la actualizacion del json");
+		}
+	}
 
 }

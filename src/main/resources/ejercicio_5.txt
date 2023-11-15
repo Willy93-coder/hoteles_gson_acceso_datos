@@ -1,0 +1,9 @@
+5. Mencionar las ventajas y desventajas, entre los tecnologías GSON y JACKSON vistes en clase para el procesamiento de archivos JSON.
+
+Una de las ventajas de usar GSON es que es una librería creada por Google lo cual nos puede garantizar que va a ser mantenida a lo largo de los años, 
+a parte de ser bastante fiable. Otra ventaja sería que puede ser usada sobre objetos de cualquier tipo de clases, además que es bastante simple de usar.
+La desventaja es que esta pensada para serializar y deserializar objetos pequeños.
+
+Una de las ventajas de usar JACKSON es que está pensada para serializar y deserializar objetos bastantes grandes y además es más sencillo manejar tipos de
+datos más complejos. La desventaja es la complejidad a la hora de implementar esta serialización sobre todo si se trata de objetos pequeños.
+
